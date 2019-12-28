@@ -54,11 +54,27 @@ def main1():
 
 
 
-    print(df_data['CH1Avg'].loc['2017-4-10':'2017-4-11'])
+    # print(df_data['CH1Avg'].loc['2017-4-10':'2017-4-11'])
+
+    # density=(df_data['CH12Avg'].loc['2017-5-1':]*1000/101325)*(273.15/(df_data['CH13Avg'].loc['2017-5-1':]+273.15))*1.29
+    density=df_data['CH12Avg'].loc['2017-5-1':]*1000/287*(df_data['CH11Avg'].loc['2017-5-1':]+273.15)
+    p=df_data['CH12Avg'].loc['2017-5-1':]
+    tem = df_data['CH11Avg'].loc['2017-5-1':]
+
+    density=p*1000/(287*(tem+273.15))
 
     ws = df_data['CH1Avg'].loc['2017-5-1':]
-    wd = df_data['CH10Avg'].loc['2017-5-1':]
-    df = pd.DataFrame({'speed': ws, 'direction': wd})
+    pwd=df_data['CH1Avg'].loc['2017-5-1':]**3*0.5*density
+
+    print("ws")
+    density_period=density.to_period('M')
+    density.index= density_period.index.asfreq('M')
+    # print(density.groupby('Date & Time Stamp').mean())
+
+    print(density.loc['2017-6'])
+
+    wd = df_data['CH7Avg'].loc['2017-5-1':]
+    df = pd.DataFrame({'speed': pwd, 'direction': wd})
 
 
 
