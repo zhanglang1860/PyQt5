@@ -11,7 +11,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 from PyQt5.QtWidgets import QMainWindow, QPushButton, QApplication
 
-
+import chart_studio
+chart_studio.tools.set_credentials_file(
+    username='zhanglang86', # 这儿就不放我自己的账号和api了
+    api_key='MxJLQuDBGkAVEZI7f2J0'
+    )
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
